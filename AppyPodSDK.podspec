@@ -7,24 +7,20 @@
 #
 
 Pod::Spec.new do |spec|
-
-s.name               = 'AppySDK'
-s.version            = '1.7.0'
-s.summary         = 'AppySDK is a framework for controlling objects in the houses.'
+s.name         = "AppyPodSDK"
+s.version      = "1.0.0"
+s.summary      = "AppyPodSDK is a framework for controlling objects in the houses."
+s.author               = 'AppySDK'
 s.homepage        = 'https://github.com/Dol2oMo/Appy-Home-Automation'
 s.license         = 'MIT'
-s.author               = 'AppySDK'
+s.source       = { :git => 'https://github.com/Dol2oMo/Appy-Home-Automation.git',:tag => s.version.to_s}
 s.ios.deployment_target = '10.0'
-s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.2' }
-s.swift_version = '4.2'
-s.source              = { :git => 'https://github.com/Dol2oMo/Appy-Home-Automation.git', :tag => s.version }
 s.ios.vendored_frameworks = 'AppySDK.framework'
 s.dependency 'Alamofire', '~> 4.7.3'
 s.dependency 'ObjectMapper', '~> 3.4.1'
 s.dependency 'AppySupportingSDK', '1.1.0'
 s.user_target_xcconfig = { 'ENABLE_BITCODE' => 'NO' }
 s.pod_target_xcconfig = {
-'ENABLE_BITCODE' => 'NO'
+  'ENABLE_BITCODE' => 'NO'
 }
-
 end
