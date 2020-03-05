@@ -1,0 +1,665 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.1.3 effective-4.2 (swiftlang-1100.0.282.1 clang-1100.0.33.15)
+// swift-module-flags: -target i386-apple-ios9.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 4.2 -enforce-exclusivity=checked -O -module-name AppySDK
+import Alamofire
+@_exported import AppySDK
+import AppySupportingSDK
+import Foundation
+import ObjectMapper
+import Swift
+import UIKit
+public struct DaikinsParams {
+}
+@objc open class APDimmerStatus : AppySDK.APStatus {
+  @objc override dynamic public init()
+  override public init(minValue: Swift.Int = 0, maxValue: Swift.Int = 100, currentValue: Swift.String, lastAction: Swift.String, availableActions: [Swift.String])
+  required public init?(map: ObjectMapper.Map)
+  @objc deinit
+}
+public struct BlindParams {
+}
+@objc open class APDimmer : AppySDK.APObject {
+  public var actions: [AppySDK.APDimmerCommand]
+  @objc override dynamic public init()
+  required public init?(map: ObjectMapper.Map)
+  override public func mapping(map: ObjectMapper.Map)
+  @objc deinit
+}
+@objc open class APImage : ObjectiveC.NSObject, ObjectMapper.Mappable {
+  public var original: Swift.String?
+  public var xxLarge: Swift.String?
+  public var xLarge: Swift.String?
+  public var large: Swift.String?
+  public var medium: Swift.String?
+  public var small: Swift.String?
+  public var thumb: Swift.String?
+  required public init?(map: ObjectMapper.Map)
+  @objc override dynamic public init()
+  public func mapping(map: ObjectMapper.Map)
+  @objc deinit
+}
+@objc open class APStatus : AppySDK.APBase {
+  public var minValue: Swift.String?
+  public var maxValue: Swift.String?
+  public var currentValue: Swift.String?
+  public var lastAction: Swift.String?
+  public var availableActions: [Swift.String]
+  @objc override dynamic public init()
+  public init(minValue: Swift.Int = 0, maxValue: Swift.Int = 1, currentValue: Swift.String, lastAction: Swift.String, availableActions: [Swift.String])
+  required public init?(map: ObjectMapper.Map)
+  override public func mapping(map: ObjectMapper.Map)
+  @objc deinit
+}
+@objc open class APToggleSwitch : AppySDK.APObject {
+  public var actions: [AppySDK.APToggleSwitchCommand]
+  @objc override dynamic public init()
+  required public init?(map: ObjectMapper.Map)
+  override public func mapping(map: ObjectMapper.Map)
+  @objc deinit
+}
+@objc open class APObject : AppySDK.APBase {
+  public var type: Swift.String?
+  public var klass: Swift.String?
+  @objc override dynamic public init()
+  required public init?(map: ObjectMapper.Map)
+  override public func mapping(map: ObjectMapper.Map)
+  @objc deinit
+}
+public typealias APConnectionFailedException = AppySDK.APException
+public typealias APConnectionTimeoutException = AppySDK.APException
+public typealias APUnknownConnectionErrorException = AppySDK.APException
+public typealias APGatewayRejectedException = AppySDK.APException
+public typealias APAuthenticationFailedException = AppySDK.APException
+public typealias APResourceNotFoundException = AppySDK.APException
+public typealias APInternalServerErrorException = AppySDK.APException
+public typealias APUnknownErrorException = AppySDK.APException
+public class APException : Swift.Error {
+  @objc deinit
+}
+public class AppySDKManager {
+  public static let shared: AppySDK.AppySDKManager
+  public static let automation: AppySDK.APAutomation
+  public func getLocalMode() -> Swift.Bool
+  public func hasPin() -> Swift.Bool
+  public func getPin() -> Swift.String?
+  public func hasUnit() -> Swift.Bool
+  public func initialize(withApiKey apiKey: Swift.String)
+  public func setAppKey(_ appKey: Swift.String)
+  public func setProduction(isProduction: Swift.Bool)
+  @objc deinit
+}
+public typealias CompletionBlock = () -> Swift.Void
+public typealias CompletionBlockWithMessage = (Swift.String) -> Swift.Void
+public typealias FailureErrorBlock = (AppySDK.APException) -> Swift.Void
+public typealias ObjectOptionalCompletionBlock<T> = (T?) -> Swift.Void
+public typealias ObjectCompletionBlock<T> = (T) -> Swift.Void
+public typealias ObjectsCompletionBlock<T> = ([T]) -> Swift.Void
+public typealias BTCExtractDataBlock = (Swift.String?, Swift.String?, Swift.String?) -> Swift.Void
+public typealias SendCommandDoneBlock = (AppySupportingSDK.TCPSocketHandler?, Swift.Bool) -> Swift.Void
+public typealias SendCommandErrorBlock = (AppySupportingSDK.TCPSocketHandler?, AppySupportingSDK.kSocketHandlerErrorCode) -> Swift.Void
+public typealias ReceiveResponseBlock = (AppySupportingSDK.TCPSocketHandler?, Swift.String, Swift.String) -> Swift.Void
+@objc public class AutomationManager : ObjectiveC.NSObject {
+  public static let shared: AppySDK.AutomationManager
+  public func decodeScenceAddress(_ address: Swift.String) -> Swift.String
+  public func decodeHostAddress(_ address: Swift.String) -> Swift.String
+  public func getStatusCommand(who: Swift.Int, address: Swift.String) -> Swift.String
+  public func getSendCommand(who: Swift.Int, what: Swift.String, address: Swift.String) -> Swift.String
+  public func newTCPSocketHandler(with address: Swift.String) -> AppySupportingSDK.TCPSocketHandler
+  public func newTCPSocketHandler() -> AppySupportingSDK.UDPSocketHandler
+  public func startMonitoringBTCStatus(addresses: [Swift.String]?, password: Swift.String?, block: @escaping AppySDK.BTCExtractDataBlock)
+  public func getBTCStatus(address: Swift.String, command: Swift.String, block: @escaping AppySDK.BTCExtractDataBlock, terminateBlock: AppySDK.SendCommandErrorBlock? = nil)
+  public func stopMonitoringBTCStatus()
+  public func send(command: Swift.String, address: Swift.String, onReponse: AppySDK.ReceiveResponseBlock?, completion: AppySDK.SendCommandDoneBlock?, terminateBlock: AppySDK.SendCommandErrorBlock? = nil)
+  @objc deinit
+}
+@objc open class APBlindStatus : AppySDK.APStatus {
+  @objc override dynamic public init()
+  override public init(minValue: Swift.Int = 0, maxValue: Swift.Int = 1, currentValue: Swift.String, lastAction: Swift.String, availableActions: [Swift.String])
+  required public init?(map: ObjectMapper.Map)
+  @objc deinit
+}
+public struct ToggleSwitchParams {
+}
+public enum APError : Swift.Error {
+  case serverError(message: Swift.String?, code: Swift.Int?)
+  case apiDeprecated(message: Swift.String?, date: Swift.String?)
+  case custom(errorMessage: Swift.String)
+}
+public struct LightParams {
+}
+@objc open class APBase : ObjectiveC.NSObject, ObjectMapper.Mappable {
+  public var id: Swift.String?
+  public var title: Swift.String?
+  public var alternateTitle: Swift.String?
+  public var icon: Swift.String?
+  public var circuitAddress: Swift.String?
+  public var hostAddress: Swift.String?
+  public var sceneCommand: Swift.String?
+  required public init?(map: ObjectMapper.Map)
+  @objc override dynamic public init()
+  public func mapping(map: ObjectMapper.Map)
+  @objc deinit
+}
+public struct RemoteControlParams {
+}
+public struct HashidsOptions {
+}
+public protocol HashidsGenerator {
+  associatedtype Char
+  func encode(_ value: Swift.Int64...) -> Swift.String?
+  func encode(_ values: [Swift.Int64]) -> Swift.String?
+  func encode(_ value: Swift.Int...) -> Swift.String?
+  func encode(_ values: [Swift.Int]) -> Swift.String?
+  func decode(_ value: Swift.String!) -> [Swift.Int]
+  func decode(_ value: [Self.Char]) -> [Swift.Int]
+  func decode64(_ value: Swift.String) -> [Swift.Int64]
+  func decode64(_ value: [Self.Char]) -> [Swift.Int64]
+}
+public typealias Hashids = AppySDK.Hashids_<Swift.UInt32>
+open class Hashids_<T> : AppySDK.HashidsGenerator where T : Swift.UnsignedInteger {
+  public typealias Char = T
+  public init(salt: Swift.String!, minHashLength: Swift.UInt = 0, alphabet: Swift.String? = nil)
+  open func encode(_ value: Swift.Int64...) -> Swift.String?
+  open func encode(_ values: [Swift.Int64]) -> Swift.String?
+  open func encode(_ value: Swift.Int...) -> Swift.String?
+  open func encode(_ values: [Swift.Int]) -> Swift.String?
+  open func decode(_ value: Swift.String!) -> [Swift.Int]
+  open func decode(_ value: [AppySDK.Hashids_<T>.Char]) -> [Swift.Int]
+  open func decode64(_ value: Swift.String) -> [Swift.Int64]
+  open func decode64(_ value: [AppySDK.Hashids_<T>.Char]) -> [Swift.Int64]
+  @objc deinit
+}
+@objc open class APLightStatus : AppySDK.APStatus {
+  @objc override dynamic public init()
+  override public init(minValue: Swift.Int = 0, maxValue: Swift.Int = 1, currentValue: Swift.String, lastAction: Swift.String, availableActions: [Swift.String])
+  required public init?(map: ObjectMapper.Map)
+  @objc deinit
+}
+@objc open class APBlind : AppySDK.APObject {
+  public var actions: [AppySDK.APBlindCommand]
+  @objc override dynamic public init()
+  required public init?(map: ObjectMapper.Map)
+  override public func mapping(map: ObjectMapper.Map)
+  @objc deinit
+}
+@objc open class APRemoteControlAction : AppySDK.APBase {
+  public var name: Swift.String!
+  public var desc: Swift.String!
+  public var action: Swift.String!
+  override public func mapping(map: ObjectMapper.Map)
+  required public init?(map: ObjectMapper.Map)
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc open class APDaikinStatus : ObjectiveC.NSObject, ObjectMapper.Mappable {
+  public var title: Swift.String?
+  public var temperature: Swift.String?
+  public var onOff: Swift.String?
+  public var address: Swift.String?
+  public var fanSpeed: Swift.String?
+  public var fanDirection: Swift.String?
+  public var operationMode: Swift.String?
+  @objc override dynamic public init()
+  required public init?(map: ObjectMapper.Map)
+  public func mapping(map: ObjectMapper.Map)
+  @objc deinit
+}
+@objc open class APRoom : AppySDK.APBase {
+  public var backgrounds: AppySDK.APImage?
+  public var icons: AppySDK.APImage?
+  public var controls: [AppySDK.APControl]
+  @objc override dynamic public init()
+  required public init?(map: ObjectMapper.Map)
+  override public func mapping(map: ObjectMapper.Map)
+  @objc deinit
+}
+public typealias APLightCommand = AppySDK.APAction<AppySDK.LightCommand>
+public typealias APBlindCommand = AppySDK.APAction<AppySDK.BlindCommand>
+public typealias APDimmerCommand = AppySDK.APAction<AppySDK.DimmerCommand>
+public typealias APScenarioCommand = AppySDK.APAction<AppySDK.ScenarioCommand>
+public typealias APDaikinsCommand = AppySDK.APAction<AppySDK.DaikinsCommand>
+public typealias APCoolAutomationsCommand = AppySDK.APAction<AppySDK.CoolAutomationsCommand>
+public typealias APToggleSwitchCommand = AppySDK.APAction<AppySDK.ToggleSwitchCommand>
+public typealias APTemperatureCommand = AppySDK.APAction<AppySDK.TemperatureCommand>
+public typealias APFanSpeedCommand = AppySDK.APAction<AppySDK.FanSpeedCommand>
+public typealias APFanSwingCommand = AppySDK.APAction<AppySDK.FanSwingCommand>
+public enum LightCommand : Swift.String {
+  case off
+  case on
+  public var hashValue: Swift.Int {
+    get
+  }
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+  public init?(rawValue: Swift.String)
+}
+public enum BlindCommand : Swift.String {
+  case stop
+  case on
+  case off
+  public var hashValue: Swift.Int {
+    get
+  }
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+  public init?(rawValue: Swift.String)
+}
+public enum DimmerCommand : Swift.String {
+  case off
+  case on
+  case dimmer20
+  case dimmer30
+  case dimmer40
+  case dimmer50
+  case dimmer60
+  case dimmer70
+  case dimmer80
+  case dimmer90
+  case dimmer100
+  public var hashValue: Swift.Int {
+    get
+  }
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+  public init?(rawValue: Swift.String)
+}
+public enum ScenarioCommand : Swift.String {
+  case activate
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum CoolAutomationsCommand : Swift.String {
+  case on
+  case off
+  case modeCool
+  case modeFan
+  case temperature
+  case fanSpeed
+  case fanSwing
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum DaikinsCommand : Swift.String {
+  case onOff
+  case operationMode
+  case temp
+  case fanSpeed
+  case fanDirection
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+  public init?(rawValue: Swift.String)
+}
+public enum DaikinsOnOffCommand : Swift.String {
+  case on
+  case off
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+  public init?(rawValue: Swift.String)
+}
+public enum DaikinsOperationModeCommand : Swift.String {
+  case fan
+  case heat
+  case cool
+  case dry
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+  public init?(rawValue: Swift.String)
+}
+public enum DaikinsTemperatureCommand : Swift.String {
+  case temp_18
+  case temp_19
+  case temp_20
+  case temp_21
+  case temp_22
+  case temp_23
+  case temp_24
+  case temp_25
+  case temp_26
+  case temp_27
+  case temp_28
+  case temp_29
+  case temp_30
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+  public init?(rawValue: Swift.String)
+}
+public enum DaikinsFanSpeedCommand : Swift.String {
+  case low
+  case medium
+  case high
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+  public init?(rawValue: Swift.String)
+}
+public enum DaikinsFanDirectionCommand : Swift.String {
+  case direction_0
+  case direction_1
+  case direction_2
+  case direction_3
+  case direction_4
+  case swing
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+  public init?(rawValue: Swift.String)
+}
+public enum ToggleSwitchCommand : Swift.String {
+  case off
+  case on
+  public var hashValue: Swift.Int {
+    get
+  }
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+  public init?(rawValue: Swift.String)
+}
+public enum RemoteControlCommand : Swift.String {
+  case senCommand
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+  public init?(rawValue: Swift.String)
+}
+public enum TemperatureCommand : Swift.String {
+  case temp18
+  case temp19
+  case temp20
+  case temp21
+  case temp22
+  case temp23
+  case temp24
+  case temp25
+  case temp26
+  case temp27
+  case temp28
+  case temp29
+  case temp30
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum FanSpeedCommand : Swift.String {
+  case veryLow
+  case low
+  case medium
+  case high
+  case veryHigh
+  case auto
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum FanSwingCommand : Swift.String {
+  case horizontal
+  case vertical
+  case auto
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum webServerModel : Swift.Int {
+  case kWebServerModelUndefine
+  case kWebServerModelF453AV
+  case kWebServerModelF454
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public enum socketTag : Swift.Int {
+  case kSocketTagRespond
+  case kSocketTagIdentifyHost
+  case kSocketTagMonitoring
+  case kSocketTagRequestStatus
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public struct CoolAutomationsParams {
+}
+@objc open class APRemoteControl : AppySDK.APObject {
+  public var actions: [AppySDK.APRemoteControlAction]
+  @objc override dynamic public init()
+  required public init?(map: ObjectMapper.Map)
+  override public func mapping(map: ObjectMapper.Map)
+  @objc deinit
+}
+open class APAction<T> : AppySDK.APBase where T : Swift.RawRepresentable {
+  public var name: Swift.String!
+  public var desc: Swift.String!
+  public var action: T!
+  override public func mapping(map: ObjectMapper.Map)
+  required public init?(map: ObjectMapper.Map)
+  @objc override dynamic public init()
+  @objc deinit
+}
+public struct ScenarioParams {
+}
+@objc open class APDaikin : AppySDK.APObject {
+  public var actions: [AppySDK.APDaikinsCommand]
+  public var status: AppySDK.APDaikinStatus?
+  @objc override dynamic public init()
+  required public init?(map: ObjectMapper.Map)
+  override public func mapping(map: ObjectMapper.Map)
+  @objc deinit
+}
+@objc open class APCoolAutomations : AppySDK.APObject {
+  public var actions: [AppySDK.APCoolAutomationsCommand]
+  @objc override dynamic public init()
+  required public init?(map: ObjectMapper.Map)
+  override public func mapping(map: ObjectMapper.Map)
+  @objc deinit
+}
+public struct DimmerParams {
+}
+@objc open class APToggleSwitchStatus : AppySDK.APStatus {
+  @objc override dynamic public init()
+  override public init(minValue: Swift.Int = 0, maxValue: Swift.Int = 1, currentValue: Swift.String, lastAction: Swift.String, availableActions: [Swift.String])
+  required public init?(map: ObjectMapper.Map)
+  @objc deinit
+}
+@objc open class APHome : AppySDK.APBase {
+  public var rooms: [AppySDK.APRoom]
+  @objc override dynamic public init()
+  required public init?(map: ObjectMapper.Map)
+  override public func mapping(map: ObjectMapper.Map)
+  @objc deinit
+}
+extension String {
+  public func localized() -> Swift.String
+}
+extension Dictionary {
+  public static func += (lhs: inout [Key : Value], rhs: [Key : Value])
+}
+@objc open class APScenario : AppySDK.APObject {
+  public var actions: [AppySDK.APScenarioCommand]
+  @objc override dynamic public init()
+  required public init?(map: ObjectMapper.Map)
+  override public func mapping(map: ObjectMapper.Map)
+  @objc deinit
+}
+@objc open class APCoolAutomationsStatus : AppySDK.APBase {
+  public var state: Swift.String?
+  public var setTemperature: Swift.String?
+  public var currentTemperature: Swift.String?
+  public var fanSpeed: Swift.String?
+  public var mode: Swift.String?
+  public var failureCode: Swift.String?
+  @objc override dynamic public init()
+  required public init?(map: ObjectMapper.Map)
+  override public func mapping(map: ObjectMapper.Map)
+  @objc deinit
+}
+@objc public class APAutomation : ObjectiveC.NSObject {
+  @objc override dynamic public init()
+  public func setPin(_ pin: Swift.String?)
+  public func setUnit(_ unit: Swift.String?)
+  public func setLocalMode(_ localMode: Swift.Bool)
+  public func getHomes(completion: @escaping AppySDK.ObjectsCompletionBlock<AppySDK.APHome>, failureBlock: @escaping AppySDK.FailureErrorBlock)
+  public func getHome(APHome apHome: AppySDK.APHome, completion: @escaping AppySDK.ObjectCompletionBlock<AppySDK.APHome>, failureBlock: @escaping AppySDK.FailureErrorBlock)
+  public func getControls(APHome apHome: AppySDK.APHome, completion: @escaping AppySDK.ObjectsCompletionBlock<AppySDK.APControl>, failureBlock: @escaping AppySDK.FailureErrorBlock)
+  public func getRooms(APHome apHome: AppySDK.APHome, completion: @escaping AppySDK.ObjectsCompletionBlock<AppySDK.APRoom>, failureBlock: @escaping AppySDK.FailureErrorBlock)
+  public func getRoom(APHome apHome: AppySDK.APHome, apRoom: AppySDK.APRoom, completion: @escaping AppySDK.ObjectCompletionBlock<AppySDK.APRoom>, failureBlock: @escaping AppySDK.FailureErrorBlock)
+  public func getBlinds(APHome apHome: AppySDK.APHome, completion: @escaping AppySDK.ObjectsCompletionBlock<AppySDK.APBlind>, failureBlock: @escaping AppySDK.FailureErrorBlock)
+  public func getDimmers(APHome apHome: AppySDK.APHome, completion: @escaping AppySDK.ObjectsCompletionBlock<AppySDK.APDimmer>, failureBlock: @escaping AppySDK.FailureErrorBlock)
+  public func getLights(APHome apHome: AppySDK.APHome, completion: @escaping AppySDK.ObjectsCompletionBlock<AppySDK.APLight>, failureBlock: @escaping AppySDK.FailureErrorBlock)
+  public func getToggleSwitches(APHome apHome: AppySDK.APHome, completion: @escaping AppySDK.ObjectsCompletionBlock<AppySDK.APToggleSwitch>, failureBlock: @escaping AppySDK.FailureErrorBlock)
+  public func getScenarios(APHome apHome: AppySDK.APHome, completion: @escaping AppySDK.ObjectsCompletionBlock<AppySDK.APScenario>, failureBlock: @escaping AppySDK.FailureErrorBlock)
+  public func getCoolAutomations(APHome apHome: AppySDK.APHome, completion: @escaping AppySDK.ObjectsCompletionBlock<AppySDK.APCoolAutomations>, failureBlock: @escaping AppySDK.FailureErrorBlock)
+  public func getRemoteControls(APHome apHome: AppySDK.APHome, completion: @escaping AppySDK.ObjectsCompletionBlock<AppySDK.APRemoteControl>, failureBlock: @escaping AppySDK.FailureErrorBlock)
+  public func getDaikins(APHome apHome: AppySDK.APHome, completion: @escaping AppySDK.ObjectsCompletionBlock<AppySDK.APDaikin>, failureBlock: @escaping AppySDK.FailureErrorBlock)
+  public func getDimmerStatus(APHome apHome: AppySDK.APHome, apDimmer: AppySDK.APDimmer, localMode: Swift.Bool = AppySDKManager.shared.getLocalMode(), completion: @escaping AppySDK.ObjectsCompletionBlock<AppySDK.APDimmerStatus>, failureBlock: @escaping AppySDK.FailureErrorBlock)
+  public func getToggleSwitchStatus(APHome apHome: AppySDK.APHome, apToggleSwitch: AppySDK.APToggleSwitch, localMode: Swift.Bool = AppySDKManager.shared.getLocalMode(), completion: @escaping AppySDK.ObjectsCompletionBlock<AppySDK.APToggleSwitchStatus>, failureBlock: @escaping AppySDK.FailureErrorBlock)
+  public func getLightStatus(APHome apHome: AppySDK.APHome, apLight: AppySDK.APLight, localMode: Swift.Bool = AppySDKManager.shared.getLocalMode(), completion: @escaping AppySDK.ObjectsCompletionBlock<AppySDK.APLightStatus>, failureBlock: @escaping AppySDK.FailureErrorBlock)
+  public func getBlindStatus(APHome apHome: AppySDK.APHome, apBlind: AppySDK.APBlind, localMode: Swift.Bool = AppySDKManager.shared.getLocalMode(), completion: @escaping AppySDK.ObjectsCompletionBlock<AppySDK.APBlindStatus>, failureBlock: @escaping AppySDK.FailureErrorBlock)
+  public func getCoolAutomationsStatus(APHome apHome: AppySDK.APHome, apCoolAutomations: AppySDK.APCoolAutomations, completion: @escaping AppySDK.ObjectsCompletionBlock<AppySDK.APCoolAutomationsStatus>, failureBlock: @escaping AppySDK.FailureErrorBlock)
+  public func getDaikinStatus(APHome apHome: AppySDK.APHome, apDaikin: AppySDK.APDaikin, completion: @escaping AppySDK.ObjectsCompletionBlock<AppySDK.APDaikinStatus>, failureBlock: @escaping AppySDK.FailureErrorBlock)
+  public func sendCommand(APHome apHome: AppySDK.APHome, apBlind: AppySDK.APBlind, command: AppySDK.BlindCommand, localMode: Swift.Bool = AppySDKManager.shared.getLocalMode(), completion: @escaping AppySDK.CompletionBlock, failureBlock: @escaping AppySDK.FailureErrorBlock)
+  public func sendCommand(APHome apHome: AppySDK.APHome, apDimmer: AppySDK.APDimmer, command: AppySDK.DimmerCommand, localMode: Swift.Bool = AppySDKManager.shared.getLocalMode(), completion: @escaping AppySDK.CompletionBlock, failureBlock: @escaping AppySDK.FailureErrorBlock)
+  public func sendCommand(APHome apHome: AppySDK.APHome, apLight: AppySDK.APLight, command: AppySDK.LightCommand, localMode: Swift.Bool = AppySDKManager.shared.getLocalMode(), completion: @escaping AppySDK.CompletionBlock, failureBlock: @escaping AppySDK.FailureErrorBlock)
+  public func sendCommand(APHome apHome: AppySDK.APHome, apToggleSwitch: AppySDK.APToggleSwitch, command: AppySDK.ToggleSwitchCommand, localMode: Swift.Bool = AppySDKManager.shared.getLocalMode(), completion: @escaping AppySDK.CompletionBlock, failureBlock: @escaping AppySDK.FailureErrorBlock)
+  public func sendCommand(APHome apHome: AppySDK.APHome, apRemoteControl: AppySDK.APRemoteControl, commandParams: AppySDK.APRemoteControlAction, localMode: Swift.Bool = AppySDKManager.shared.getLocalMode(), completion: @escaping AppySDK.CompletionBlock, failureBlock: @escaping AppySDK.FailureErrorBlock)
+  public func sendCommand(APHome apHome: AppySDK.APHome, apScenario: AppySDK.APScenario, command: AppySDK.ScenarioCommand, localMode: Swift.Bool = AppySDKManager.shared.getLocalMode(), completion: @escaping AppySDK.CompletionBlock, failureBlock: @escaping AppySDK.FailureErrorBlock)
+  public func sendCommand(APHome apHome: AppySDK.APHome, apCoolAutomations: AppySDK.APCoolAutomations, command: AppySDK.CoolAutomationsCommand, completion: @escaping AppySDK.CompletionBlock, failureBlock: @escaping AppySDK.FailureErrorBlock)
+  public func sendCommand(APHome apHome: AppySDK.APHome, apDaikin: AppySDK.APDaikin, param: AppySDK.DaikinsOnOffCommand, completion: @escaping AppySDK.CompletionBlock, failureBlock: @escaping AppySDK.FailureErrorBlock)
+  public func sendCommand(APHome apHome: AppySDK.APHome, apDaikin: AppySDK.APDaikin, param: AppySDK.DaikinsOperationModeCommand, completion: @escaping AppySDK.CompletionBlock, failureBlock: @escaping AppySDK.FailureErrorBlock)
+  public func sendCommand(APHome apHome: AppySDK.APHome, apDaikin: AppySDK.APDaikin, param: AppySDK.DaikinsTemperatureCommand, completion: @escaping AppySDK.CompletionBlock, failureBlock: @escaping AppySDK.FailureErrorBlock)
+  public func sendCommand(APHome apHome: AppySDK.APHome, apDaikin: AppySDK.APDaikin, param: AppySDK.DaikinsFanSpeedCommand, completion: @escaping AppySDK.CompletionBlock, failureBlock: @escaping AppySDK.FailureErrorBlock)
+  public func sendCommand(APHome apHome: AppySDK.APHome, apDaikin: AppySDK.APDaikin, param: AppySDK.DaikinsFanDirectionCommand, completion: @escaping AppySDK.CompletionBlock, failureBlock: @escaping AppySDK.FailureErrorBlock)
+  public func sendCommandCoolAutomationsTemperature(APHome apHome: AppySDK.APHome, apCoolAutomations: AppySDK.APCoolAutomations, param: AppySDK.TemperatureCommand, completion: @escaping AppySDK.CompletionBlock, failureBlock: @escaping AppySDK.FailureErrorBlock)
+  public func sendCommandCoolAutomationsFanSpeed(APHome apHome: AppySDK.APHome, apCoolAutomations: AppySDK.APCoolAutomations, param: AppySDK.FanSpeedCommand, completion: @escaping AppySDK.CompletionBlock, failureBlock: @escaping AppySDK.FailureErrorBlock)
+  public func sendCommandCoolAutomationsFanSwing(APHome apHome: AppySDK.APHome, apCoolAutomations: AppySDK.APCoolAutomations, param: AppySDK.FanSwingCommand, completion: @escaping AppySDK.CompletionBlock, failureBlock: @escaping AppySDK.FailureErrorBlock)
+  @objc deinit
+}
+public protocol Controllable {
+  var type: Swift.String? { get set }
+  var klass: Swift.String? { get set }
+}
+@objc open class APLight : AppySDK.APBase, AppySDK.Controllable {
+  public var type: Swift.String?
+  public var klass: Swift.String?
+  public var actions: [AppySDK.APLightCommand]
+  @objc override dynamic public init()
+  required public init?(map: ObjectMapper.Map)
+  override public func mapping(map: ObjectMapper.Map)
+  @objc deinit
+}
+public enum ActionType : Swift.String {
+  case bticinoLight
+  case overkizLight
+  case bticinoBlind
+  case overkizBlind
+  case bticinoDimmer
+  case overkizDimmer
+  case bticinoScene
+  case overkizScene
+  case overkizToggleSwitch
+  case overkizRemoteControl
+  case bticinoDaikin
+  case bticinoCoolAutomations
+  case bticinoOutlet
+  case bticinoAirConditioner
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@objc public class APControl : AppySDK.APBase {
+  public var type: Swift.String?
+  public var klass: Swift.String?
+  public var actions: [AppySDK.APBase]
+  @objc override dynamic public init()
+  required public init?(map: ObjectMapper.Map)
+  override public func mapping(map: ObjectMapper.Map)
+  @objc deinit
+}
+extension AppySDK.LightCommand : Swift.Hashable {}
+extension AppySDK.LightCommand : Swift.RawRepresentable {}
+extension AppySDK.BlindCommand : Swift.Equatable {}
+extension AppySDK.BlindCommand : Swift.Hashable {}
+extension AppySDK.BlindCommand : Swift.RawRepresentable {}
+extension AppySDK.DimmerCommand : Swift.Hashable {}
+extension AppySDK.DimmerCommand : Swift.RawRepresentable {}
+extension AppySDK.ScenarioCommand : Swift.Equatable {}
+extension AppySDK.ScenarioCommand : Swift.Hashable {}
+extension AppySDK.ScenarioCommand : Swift.RawRepresentable {}
+extension AppySDK.CoolAutomationsCommand : Swift.Equatable {}
+extension AppySDK.CoolAutomationsCommand : Swift.Hashable {}
+extension AppySDK.CoolAutomationsCommand : Swift.RawRepresentable {}
+extension AppySDK.DaikinsCommand : Swift.Equatable {}
+extension AppySDK.DaikinsCommand : Swift.Hashable {}
+extension AppySDK.DaikinsCommand : Swift.RawRepresentable {}
+extension AppySDK.DaikinsOnOffCommand : Swift.Equatable {}
+extension AppySDK.DaikinsOnOffCommand : Swift.Hashable {}
+extension AppySDK.DaikinsOnOffCommand : Swift.RawRepresentable {}
+extension AppySDK.DaikinsOperationModeCommand : Swift.Equatable {}
+extension AppySDK.DaikinsOperationModeCommand : Swift.Hashable {}
+extension AppySDK.DaikinsOperationModeCommand : Swift.RawRepresentable {}
+extension AppySDK.DaikinsTemperatureCommand : Swift.Equatable {}
+extension AppySDK.DaikinsTemperatureCommand : Swift.Hashable {}
+extension AppySDK.DaikinsTemperatureCommand : Swift.RawRepresentable {}
+extension AppySDK.DaikinsFanSpeedCommand : Swift.Equatable {}
+extension AppySDK.DaikinsFanSpeedCommand : Swift.Hashable {}
+extension AppySDK.DaikinsFanSpeedCommand : Swift.RawRepresentable {}
+extension AppySDK.DaikinsFanDirectionCommand : Swift.Equatable {}
+extension AppySDK.DaikinsFanDirectionCommand : Swift.Hashable {}
+extension AppySDK.DaikinsFanDirectionCommand : Swift.RawRepresentable {}
+extension AppySDK.ToggleSwitchCommand : Swift.Hashable {}
+extension AppySDK.ToggleSwitchCommand : Swift.RawRepresentable {}
+extension AppySDK.RemoteControlCommand : Swift.Equatable {}
+extension AppySDK.RemoteControlCommand : Swift.Hashable {}
+extension AppySDK.RemoteControlCommand : Swift.RawRepresentable {}
+extension AppySDK.TemperatureCommand : Swift.Equatable {}
+extension AppySDK.TemperatureCommand : Swift.Hashable {}
+extension AppySDK.TemperatureCommand : Swift.RawRepresentable {}
+extension AppySDK.FanSpeedCommand : Swift.Equatable {}
+extension AppySDK.FanSpeedCommand : Swift.Hashable {}
+extension AppySDK.FanSpeedCommand : Swift.RawRepresentable {}
+extension AppySDK.FanSwingCommand : Swift.Equatable {}
+extension AppySDK.FanSwingCommand : Swift.Hashable {}
+extension AppySDK.FanSwingCommand : Swift.RawRepresentable {}
+extension AppySDK.webServerModel : Swift.Equatable {}
+extension AppySDK.webServerModel : Swift.Hashable {}
+extension AppySDK.webServerModel : Swift.RawRepresentable {}
+extension AppySDK.socketTag : Swift.Equatable {}
+extension AppySDK.socketTag : Swift.Hashable {}
+extension AppySDK.socketTag : Swift.RawRepresentable {}
+extension AppySDK.ActionType : Swift.Equatable {}
+extension AppySDK.ActionType : Swift.Hashable {}
+extension AppySDK.ActionType : Swift.RawRepresentable {}
