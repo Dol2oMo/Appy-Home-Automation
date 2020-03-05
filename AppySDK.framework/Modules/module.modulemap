@@ -1,0 +1,11 @@
+framework module AppySDK {
+  umbrella header "AppySDK.h"
+
+  export *
+  module * { export * }
+}
+
+module AppySDK.Swift {
+    header "AppySDK-Swift.h"
+    requires objc
+}
